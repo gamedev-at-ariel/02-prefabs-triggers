@@ -1,20 +1,38 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /**
  * This component spawns the given laser-prefab whenever the player clicks a given key.
  * It also updates the "scoreText" field of the new laser.
  */
-public class LaserShooter: ClickSpawner {
+public class LaserShooter : ClickSpawner
+{
     [SerializeField] NumberField scoreField;
+    [SerializeField] float cooldownTime = 2f;
 
-    protected override GameObject spawnObject() {
-        GameObject newObject = base.spawnObject();  // base = super
+    private bool canShoot = true;
 
-        // Modify the text field of the new object.
-        ScoreAdder newObjectScoreAdder = newObject.GetComponent<ScoreAdder>();
-        if (newObjectScoreAdder)
-            newObjectScoreAdder.SetScoreField(scoreField);
+    protected override GameObject spawnObject()
+    {
+        if (canShoot)
+        {
+            GameObject newObject = base.spawnObject();  // base = super
 
-        return newObject;
+            // Modify the text field of the new object.
+            ScoreAdder newObjectScoreAdder = newObject.GetComponent<ScoreAdder>();
+
+            if (newObjectScoreAdder)
+                newObjectScoreAdder.SetScoreField(scoreField);
+            StartCoroutine(StartCooldown());
+
+            return newObject;
+        }
+        return null;
+    }
+    IEnumerator StartCooldown()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(cooldownTime);
+        canShoot = true;
     }
 }

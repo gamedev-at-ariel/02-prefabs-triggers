@@ -176,4 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggeringTag: Enemy
   scoreField: {fileID: 0}
-  pointsToAdd: 5
+  pointsToAdd: 1
