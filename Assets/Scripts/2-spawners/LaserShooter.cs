@@ -8,7 +8,7 @@ using UnityEngine;
 public class LaserShooter : ClickSpawner
 {
     [SerializeField] NumberField scoreField;
-    [SerializeField] float cooldownTime = 2f;
+    [SerializeField] float cooldownTime = 1f;
 
     private bool canShoot = true;
 
