@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 /**
@@ -11,24 +8,20 @@ public class InputMover: MonoBehaviour {
     [Tooltip("Speed of movement, in meters per second")]
     [SerializeField] float speed = 10f;
 
-    [SerializeField] InputAction moveHorizontal = new InputAction(type: InputActionType.Button);
-    [SerializeField] InputAction moveVertical  = new InputAction(type: InputActionType.Button);
-
+    [SerializeField] InputAction move = new InputAction(
+        type: InputActionType.Value, expectedControlType: nameof(Vector2));
 
     void OnEnable()  {
-        moveHorizontal.Enable();
-        moveVertical.Enable();
+        move.Enable();
     }
 
     void OnDisable()  {
-        moveHorizontal.Disable();
-        moveVertical.Disable();
+        move.Disable();
     }
 
     void Update() {
-        float horizontal = moveHorizontal.ReadValue<float>();
-        float vertical = moveVertical.ReadValue<float>();
-        Vector3 movementVector = new Vector3(horizontal, vertical, 0) * speed * Time.deltaTime;
+        Vector2 moveDirection = move.ReadValue<Vector2>();
+        Vector3 movementVector = new Vector3(moveDirection.x, moveDirection.y, 0) * speed * Time.deltaTime;
         transform.position += movementVector;
         //transform.Translate(movementVector);
         // NOTE: "Translate(movementVector)" uses relative coordinates - 

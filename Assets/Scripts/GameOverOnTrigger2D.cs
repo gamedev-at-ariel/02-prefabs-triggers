@@ -11,7 +11,7 @@ public class GameOverOnTrigger2D : MonoBehaviour
         if (other.tag == triggeringTag && enabled) {
             Debug.Log("Game over!");
             Application.Quit();
-            // UnityEditor.EditorApplication.isPlaying = false;  # Error on editor 2021.3
+            UnityEditor.EditorApplication.isPlaying = false;  // Error on editor 2021.3
         }
     }
 

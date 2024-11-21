@@ -15,7 +15,12 @@ public class ScoreAdder : MonoBehaviour {
         }
     }
 
-    public void SetScoreField(NumberField newTextField) {
+    public ScoreAdder SetScoreField(NumberField newTextField) {
         this.scoreField = newTextField;
+        return this;
+    }
+    public ScoreAdder SetPointsToAdd(int newPointsToAdd) {
+        this.pointsToAdd = newPointsToAdd;
+        return this;
     }
 }
