@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 1835875017}
   - component: {fileID: 1835875016}
   m_Layer: 0
-  m_Name: GameOver
+  m_Name: LevelNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
