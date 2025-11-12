@@ -18,10 +18,13 @@ EditorBuildSettings:
     path: Assets/Scenes/2-prefabs/b-instantiate.unity
     guid: 2e934fb2f71798c4caddce2e03fed046
   - enabled: 0
-    path: Assets/Scenes/3-triggers/d-shield.unity
+    path: Assets/Scenes/3-triggers/e-shield.unity
     guid: a031f83008145b54f8dc3a8abfc50099
   - enabled: 1
     path: Assets/Scenes/4-levels/level-2.unity
     guid: d3d37355d15a0f449a03a97787a0fd28
+  - enabled: 1
+    path: Assets/Scenes/4-levels/level-win-with-canvas.unity
+    guid: 1007af5bc201e1e419dcbcee8acbb6fa
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -10,8 +10,11 @@ public class GameOverOnTrigger2D : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == triggeringTag && enabled) {
             Debug.Log("Game over!");
-            Application.Quit();
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;  // Error on editor 2021.3
+#else
+            Application.Quit();
+#endif
         }
     }
 

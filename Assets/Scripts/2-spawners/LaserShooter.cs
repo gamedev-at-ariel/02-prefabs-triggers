@@ -10,7 +10,7 @@ public class LaserShooter: ClickSpawner {
     int pointsToAdd = 1;
 
     // A reference to the field that holds the score that has to be updated when the laser hits its target.
-    NumberField scoreField;  
+    private NumberField scoreField;  
 
     private void Start() {
         scoreField = GetComponentInChildren<NumberField>();
@@ -18,14 +18,16 @@ public class LaserShooter: ClickSpawner {
             Debug.LogError($"No child of {gameObject.name} has a NumberField component!");
     }
 
+    private void AddScore()
+    {
+        scoreField.AddNumber(pointsToAdd);
+    }
+
     protected override GameObject spawnObject() {
         GameObject newObject = base.spawnObject();  // base = super
-
-        // Modify the text field of the new object.
-        ScoreAdder newObjectScoreAdder = newObject.GetComponent<ScoreAdder>();
-        if (newObjectScoreAdder)
-            newObjectScoreAdder.SetScoreField(scoreField).SetPointsToAdd(pointsToAdd);
-
+        DestroyOnTrigger2D newObjectDestroyer = newObject.GetComponent<DestroyOnTrigger2D>();
+        if (newObjectDestroyer)
+            newObjectDestroyer.onHit += AddScore;
         return newObject;
     }
 }
