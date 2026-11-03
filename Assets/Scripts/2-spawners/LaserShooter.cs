@@ -2,7 +2,7 @@
 
 /**
  * This component spawns the given laser-prefab whenever the player clicks a given key.
- * It also updates the "scoreText" field of the new laser.
+ * It also registers a score-change action to the laser onHit event.
  */
 public class LaserShooter: ClickSpawner {
     [SerializeField]
@@ -12,22 +12,18 @@ public class LaserShooter: ClickSpawner {
     // A reference to the field that holds the score that has to be updated when the laser hits its target.
     private NumberField scoreField;  
 
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         scoreField = GetComponentInChildren<NumberField>();
         if (!scoreField)
             Debug.LogError($"No child of {gameObject.name} has a NumberField component!");
     }
 
-    private void AddScore()
-    {
-        scoreField.AddNumber(pointsToAdd);
-    }
-
     protected override GameObject spawnObject() {
         GameObject newObject = base.spawnObject();  // base = super
-        DestroyOnTrigger2D newObjectDestroyer = newObject.GetComponent<DestroyOnTrigger2D>();
-        if (newObjectDestroyer)
-            newObjectDestroyer.onHit += AddScore;
+        if (newObject.TryGetComponent<DestroyOnTrigger2D>(out DestroyOnTrigger2D newObjectDestroyer)) {
+            newObjectDestroyer.onHit += (() => { scoreField.AddNumber(pointsToAdd); });
+        }
         return newObject;
     }
 }

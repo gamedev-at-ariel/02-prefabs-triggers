@@ -8,6 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshPro))]
 public class NumberField : MonoBehaviour {
     private int number;
+    private TextMeshPro textMeshPro;
+
+    private void Awake() {  // Awake is used for caching components of this object; it is called before Start.
+        textMeshPro = GetComponent<TextMeshPro>();
+    }
 
     public int GetNumber() {
         return this.number;
@@ -15,7 +20,7 @@ public class NumberField : MonoBehaviour {
 
     public void SetNumber(int newNumber) {
         this.number = newNumber;
-        GetComponent<TextMeshPro>().text = newNumber.ToString();
+        textMeshPro.text = newNumber.ToString();
     }
 
     public void AddNumber(int toAdd) {

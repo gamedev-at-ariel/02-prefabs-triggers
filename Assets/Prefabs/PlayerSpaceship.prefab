@@ -28,15 +28,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7982204604159528605}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.1, y: -3.24, z: 0}
   m_LocalScale: {x: 0.648, y: 0.573, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &5437908062675285255
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -55,6 +56,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -76,10 +79,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5fd46a445338b1248ad1daf37cb1156e, type: 3}
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 813f14b2be7f479fbcf9ee1a785c66c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,7 +93,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &585805565187985300
 Animator:
@@ -100,7 +104,7 @@ Animator:
   m_GameObject: {fileID: 7982204604159528605}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7eba812c54584c947a587926ea25f55b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5be9d79277934a7aa0e84da51b38cd07, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -174,6 +178,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
+    m_Priority: 0
 --- !u!114 &1232778714375327405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +208,7 @@ MonoBehaviour:
       m_Action: Spawn
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   prefabToSpawn: {fileID: 206225842732292031, guid: 7526879c03876874881ee2da051c9345,
     type: 3}
   velocityOfSpawnedObject: {x: 0, y: 10, z: 0}

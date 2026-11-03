@@ -33,10 +33,18 @@ public class ClickSpawner: MonoBehaviour {
 
         return newObject;
     }
-    
-    private void Update() {
+
+    /* Option 1: */
+    protected virtual void Start() {
+        spawnAction.performed += (context => spawnObject());
+    }
+
+
+    /* Option 2:
+    protected virtual void Update() {
         if (spawnAction.WasPressedThisFrame()) {
             spawnObject();
         }
     }
+    */
 }

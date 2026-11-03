@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using UnityEngine;
 
 /**
@@ -10,36 +9,28 @@ public class TimedSpawner: MonoBehaviour {
     [SerializeField] Vector3 velocityOfSpawnedObject;
     [SerializeField] float secondsBetweenSpawns = 1f;
 
-    // OLD CODE using coroutines:
-    //
+    CancellationTokenSource cancellationTokenSource;
 
-    //void Start() {
-    //    this.StartCoroutine(SpawnRoutine());
-    //    Debug.Log("Start finished");
-    //}
-
-    //IEnumerator SpawnRoutine() {
-    //    while (true) {
-    //        GameObject newObject = Instantiate(prefabToSpawn.gameObject, transform.position, Quaternion.identity);
-    //        newObject.GetComponent<Mover>().SetVelocity(velocityOfSpawnedObject);
-    //        yield return new WaitForSeconds(secondsBetweenSpawns);
-    //    }
-    //}
-
-    // NEW CODE using async-await and Awaitable - works on Windows but not on WebGL
-    //
-    void Start() {
-        SpawnRoutine();
-        Debug.Log("Start finished");
+    void OnEnable() {
+        cancellationTokenSource = new CancellationTokenSource();
+        SpawnRoutine(cancellationTokenSource.Token);
+    }
+    
+    void OnDisable() {
+        // Called when the component is disabled, the GameObject is deactivated, or it is destroyed (e.g. on scene change).
+        cancellationTokenSource.Cancel();
     }
 
-    async void SpawnRoutine() {
-        while (true) {
-            GameObject newObject = Instantiate(prefabToSpawn.gameObject, transform.position, Quaternion.identity);
-            newObject.GetComponent<Mover>().SetVelocity(velocityOfSpawnedObject);
-            await Awaitable.WaitForSecondsAsync(secondsBetweenSpawns);
-            // See here for more options: https://docs.unity3d.com/6000.0/Documentation/Manual/async-awaitable-introduction.html
+    async void SpawnRoutine(CancellationToken cancellationToken) {
+        try {
+            while (true) {
+                GameObject newObject = Instantiate(prefabToSpawn.gameObject, transform.position, Quaternion.identity);
+                newObject.GetComponent<Mover>()?.SetVelocity(velocityOfSpawnedObject);
+                await Awaitable.WaitForSecondsAsync(secondsBetweenSpawns, cancellationToken);
+                // See here for more options: https://docs.unity3d.com/6000.0/Documentation/Manual/async-awaitable-introduction.html
+            }
+        } catch (System.OperationCanceledException) {
+            // The wait was cancelled in OnDisable - stop spawning.
         }
     }
-
 }
