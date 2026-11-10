@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/4-levels/level-game-over.unity
     guid: 746da71bf020a504bb92b7b3fd74cf3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/4-levels/level-win.unity
     guid: efbda32608f8719439866184c08cd90d
   - enabled: 0
